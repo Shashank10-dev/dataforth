@@ -2,10 +2,11 @@ import React from 'react';
 import { Metadata } from 'next';
 import Link from 'next/link';
 import AdZone from '@/components/AdZone';
+import AuthorBio from '@/components/AuthorBio';
 
 export const metadata: Metadata = {
-  title: 'EMI Calculation Explained: How to Plan Your Next Home or Car Loan | Dataforth',
-  description: 'Understand the mathematical formula behind EMIs and why tenure length drastically changes the total interest you pay to the bank.',
+  title: 'EMI Calculation Explained: How to Plan Your Next Loan | Dataforth',
+  description: 'Understand the math behind Equated Monthly Installments (EMI) and why extending your loan tenure drastically increases the total interest you pay.',
 };
 
 export default function BlogPost() {
@@ -26,15 +27,15 @@ export default function BlogPost() {
               "name": "Dataforth",
               "url": "https://dataforth.vercel.app"
             }],
-            "description": "Understand the mathematical formula behind EMIs and why tenure length drastically changes the total interest you pay to the bank."
+            "description": "Understand the math behind Equated Monthly Installments (EMI) and why extending your loan tenure drastically increases the total interest you pay."
           })
         }}
       />
 
-      <header className="mb-12 text-center relative">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-32 bg-sage/30 dark:bg-sage/10 blob-shape -z-10 blur-3xl"></div>
+      <header className="mb-12 text-center relative border-b border-ink/10 dark:border-white/10 pb-12">
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-32 bg-powder/30 dark:bg-powder/10 blob-shape -z-10 blur-3xl"></div>
         <div className="flex items-center justify-center gap-3 mb-6 text-sm font-medium">
-          <span className="text-sage">Finance</span>
+          <span className="text-powder">Finance</span>
           <span className="opacity-30">•</span>
           <span className="opacity-60">August 10, 2026</span>
         </div>
@@ -42,62 +43,71 @@ export default function BlogPost() {
           EMI Calculation Explained: How to Plan Your Next Loan
         </h1>
         <p className="text-xl opacity-70 leading-relaxed max-w-2xl mx-auto">
-          Understand the mathematical formula behind EMIs and why tenure length drastically changes the total interest you pay to the bank.
+          A look at the math behind Equated Monthly Installments and why extending your loan tenure drastically increases the total interest paid.
         </p>
       </header>
-      
+
       <AdZone className="mb-12 rounded-xl overflow-hidden" type="banner" />
 
-      <div className="prose prose-lg dark:prose-invert prose-headings:font-heading prose-headings:font-medium prose-a:text-sage prose-a:no-underline hover:prose-a:underline max-w-none text-ink/80 dark:text-white/80 leading-relaxed">
+      <div className="prose prose-lg dark:prose-invert prose-headings:font-heading prose-headings:font-medium prose-a:text-powder prose-a:no-underline hover:prose-a:underline mx-auto text-ink/90 dark:text-white/90 leading-relaxed">
         
-        <p>Taking out a home loan or a car loan is one of the biggest financial decisions you will ever make. The core of this decision revolves around three letters: EMI, or Equated Monthly Installment. But what exactly goes into calculating an EMI, and how can understanding it save you lakhs of rupees in interest?</p>
+        <p>Taking out a loan for a home, a car, or higher education is a significant financial commitment. The most critical metric you will deal with during this process is your Equated Monthly Installment (EMI). While banks are quick to tell you your monthly payment, understanding the underlying math is essential for making informed financial decisions and avoiding unnecessary debt.</p>
 
-        <h2>What is an EMI?</h2>
-        <p>An EMI is a fixed payment amount made by a borrower to a lender at a specified date each calendar month. Equated Monthly Installments are used to pay off both interest and principal each month, so that over a specified number of years, the loan is paid off in full.</p>
+        <p>An EMI is designed to be a fixed amount paid every month, but the way that money is distributed between the principal (the amount you borrowed) and the interest changes drastically over the lifespan of the loan.</p>
+
+        <h2>The Mechanics of an EMI</h2>
+        <p>Every EMI payment is split into two components:</p>
+        <ol>
+          <li><strong>Principal Repayment:</strong> The portion that goes toward reducing your actual debt.</li>
+          <li><strong>Interest Payment:</strong> The fee the bank charges you for borrowing the money.</li>
+        </ol>
+
+        <p>In the early years of a standard loan—especially a long-term home loan—the vast majority of your EMI goes toward paying off the interest. As the months pass and the outstanding principal slowly decreases, the interest portion of your EMI shrinks, and a larger percentage of your payment begins reducing the principal. This process is known as amortization.</p>
+
+        <h2>The Mathematics (The EMI Formula)</h2>
+        <p>The standard mathematical formula used by financial institutions to calculate an EMI is:</p>
         
-        <p>Your EMI has two components:</p>
+        <div className="bg-gray-100 dark:bg-white/5 p-4 rounded-xl text-center font-mono my-6 border border-gray-200 dark:border-white/10 text-sm overflow-x-auto">
+          E = [P × R × (1+R)^N] / [(1+R)^N-1]
+        </div>
+
         <ul>
-          <li><strong>Principal Repayment:</strong> The portion of the EMI that goes towards reducing your original loan amount.</li>
-          <li><strong>Interest Payment:</strong> The cost of borrowing the money, paid to the bank.</li>
+          <li><strong>E:</strong> Equated Monthly Installment (EMI)</li>
+          <li><strong>P:</strong> Principal Loan Amount</li>
+          <li><strong>R:</strong> Monthly Interest Rate (Annual Rate / 12 / 100)</li>
+          <li><strong>N:</strong> Loan Tenure in Months</li>
         </ul>
 
-        <h2>The EMI Formula</h2>
-        <p>The mathematical formula for calculating EMI is:</p>
-        <p className="font-mono bg-gray-100 dark:bg-white/5 p-4 rounded-lg overflow-x-auto text-sm">
-          E = [P x R x (1+R)^N] / [(1+R)^N-1]
-        </p>
-        <p>Where:</p>
-        <ul>
-          <li><strong>E</strong> is EMI</li>
-          <li><strong>P</strong> is Principal Loan Amount</li>
-          <li><strong>R</strong> is rate of interest calculated on monthly basis (i.e., R = Annual rate of interest/12/100)</li>
-          <li><strong>N</strong> is loan tenure in months</li>
-        </ul>
+        <p>Calculating this manually is tedious due to the exponents, which is why most borrowers rely on specialized calculators to run the numbers.</p>
 
-        <h2>The Trap of Long Loan Tenures</h2>
-        <p>When you apply for a loan, banks often push you towards longer loan tenures (like 25 or 30 years for a home loan). Why? Because a longer tenure significantly lowers your monthly EMI, making the loan look more "affordable."</p>
-        
-        <p>However, this is a dangerous trap. While your monthly outgo is lower, the total interest you pay over the life of the loan skyrockets. In a 30-year home loan at 9% interest, you actually pay more in interest than the original loan amount itself!</p>
-
-        <div className="bg-sage/10 dark:bg-sage/5 p-8 rounded-2xl border border-sage/20 my-10">
-          <h3 className="mt-0 mb-4 text-sage">Visualize Your Amortization Schedule</h3>
-          <p className="mb-6">The best way to understand a loan is to see a year-by-year breakdown of your principal and interest payments. We built a free EMI Calculator that generates this instantly.</p>
+        <div className="bg-powder/10 dark:bg-powder/5 p-8 rounded-2xl border border-powder/20 my-10 not-prose">
+          <h3 className="text-xl font-heading font-medium mb-3 text-powder">Plan Your Loan</h3>
+          <p className="mb-5 text-ink/80 dark:text-white/80 text-sm leading-relaxed">Avoid surprises by generating a full amortization schedule before you sign a loan agreement. Our EMI calculator processes the math locally in your browser to help you see exactly how much interest you will pay over time.</p>
           <Link 
             href="/finance-tools/emi-calculator" 
-            className="inline-block bg-sage text-white px-6 py-3 rounded-xl font-medium hover:-translate-y-0.5 transition-transform"
+            className="inline-block bg-powder text-ink px-5 py-2.5 rounded-lg font-medium hover:opacity-90 transition-opacity text-sm"
           >
-            Open the EMI Calculator
+            Open EMI Calculator
           </Link>
         </div>
 
-        <h2>The Power of Prepayments</h2>
-        <p>The secret to beating the bank at their own game is prepayments. In the early years of your loan, a massive chunk of your EMI goes entirely toward paying interest. Very little goes toward reducing the principal.</p>
-        <p>If you make an extra payment (a prepayment) directly toward your principal, it bypasses the interest schedule entirely. Prepaying just one extra EMI per year can shave years off your loan tenure and save you hundreds of thousands in interest.</p>
+        <h2>The Cost of Extending Your Tenure</h2>
+        <p>When applying for a loan, a bank officer may suggest extending the tenure (for example, from 15 years to 20 years) to lower your monthly EMI. While a lower EMI sounds appealing for monthly cash flow, the long-term mathematical cost is often staggering.</p>
 
-        <h2>Conclusion</h2>
-        <p>Before signing a loan agreement, run the numbers. Use a calculator to see the total interest payable, and experiment with reducing the loan tenure by just 2 or 3 years. You'll be shocked at how much money you can save by simply increasing your monthly EMI by a few thousand rupees.</p>
+        <p>Consider a ₹50 Lakh home loan at an 8.5% annual interest rate:</p>
+        <ul>
+          <li><strong>15-Year Tenure:</strong> The EMI is ₹49,236. Over 15 years, you will pay ₹38,62,478 in total interest.</li>
+          <li><strong>20-Year Tenure:</strong> The EMI drops to ₹43,391 (a monthly saving of ~₹5,800). However, over 20 years, you will pay ₹54,13,879 in total interest.</li>
+        </ul>
+        <p>By extending the loan by 5 years to save ₹5,800 a month, you end up paying the bank an additional ₹15.5 Lakhs in interest. Understanding this trade-off is critical for long-term wealth building.</p>
+
+        <h2>Prepayments: The Ultimate Hack</h2>
+        <p>Because early EMIs consist mostly of interest, making lump-sum prepayments in the first few years of a loan can dramatically reduce your total interest burden. Even a small prepayment goes directly toward reducing the principal amount. Since future interest is calculated on the remaining principal, a single prepayment has a compounding effect that can shave years off your loan tenure.</p>
+
+        <p>Before committing to a long-term loan, use an EMI calculator to model different scenarios. Compare the total interest paid across various tenures, and always ask your lender about their prepayment policies (some banks charge penalties for early repayment on certain types of loans).</p>
       </div>
 
+      <AuthorBio />
     </article>
   );
 }
