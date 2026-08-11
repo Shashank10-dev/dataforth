@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 
 export default function Footer() {
   return (
@@ -6,10 +7,14 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto px-4 py-16 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12">
           <div className="col-span-1 md:col-span-1">
-            <Link href="/" className="flex items-center gap-2 group mb-6">
-              <div className="w-6 h-6 rounded-full bg-peach flex items-center justify-center">
-                <div className="w-2 h-2 bg-ink rounded-full"></div>
-              </div>
+            <Link href="/" className="flex items-center gap-2 mb-4 hover:opacity-80 transition-opacity">
+              <Image 
+                src="/dataforth-logo.png" 
+                alt="Dataforth Logo" 
+                width={24} 
+                height={24} 
+                className="object-contain"
+              />
               <span className="font-heading text-xl font-bold text-ink dark:text-white tracking-tight">Dataforth</span>
             </Link>
             <p className="text-ink/60 dark:text-white/60 text-sm mb-6 leading-relaxed font-sans">

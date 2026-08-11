@@ -5,7 +5,11 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { ChevronDown, Menu, X } from 'lucide-react';
 
+import Image from 'next/image';
+
 const categories = [
+  // ...
+
   {
     name: 'PDF',
     href: '/pdf-tools',
@@ -106,9 +110,13 @@ export default function Header() {
         <div className="flex justify-between items-center h-16">
           
           <Link href="/" className="flex items-center gap-2 group z-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-peach rounded-md">
-            <div className="w-8 h-8 rounded-full bg-peach flex items-center justify-center group-hover:scale-105 transition-transform">
-              <div className="w-2.5 h-2.5 bg-ink rounded-full"></div>
-            </div>
+            <Image 
+              src="/dataforth-logo.png" 
+              alt="Dataforth Logo" 
+              width={32} 
+              height={32} 
+              className="group-hover:scale-105 transition-transform object-contain"
+            />
             <span className="font-heading text-2xl font-bold text-ink dark:text-white tracking-tight">Dataforth</span>
           </Link>
 
