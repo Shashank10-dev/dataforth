@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import { FileText, Plus, Trash2, Printer, Briefcase, Download } from 'lucide-react';
 import html2canvas from 'html2canvas';
-import jsPDF from 'jspdf';
+import { jsPDF } from 'jspdf';
 import AdZone from '@/components/AdZone';
 
 interface InvoiceItem {

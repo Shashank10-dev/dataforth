@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import { Briefcase, Printer, Plus, Trash2, Mail, Phone, MapPin, Globe, Download } from 'lucide-react';
 import html2canvas from 'html2canvas';
-import jsPDF from 'jspdf';
+import { jsPDF } from 'jspdf';
 import AdZone from '@/components/AdZone';
 
 interface Experience {
