@@ -1,7 +1,9 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { FileText, Plus, Trash2, Printer, Briefcase } from 'lucide-react';
+import { FileText, Plus, Trash2, Printer, Briefcase, Download } from 'lucide-react';
+import html2canvas from 'html2canvas';
+import jsPDF from 'jspdf';
 import AdZone from '@/components/AdZone';
 
 interface InvoiceItem {
@@ -30,6 +32,7 @@ export default function FreelancerInvoiceGenerator() {
   
   const [currency, setCurrency] = useState('USD');
   const [notes, setNotes] = useState('Thank you for your business!');
+  const [isExporting, setIsExporting] = useState(false);
   
   const addItem = () => {
     setItems([...items, { id: Math.random().toString(), description: '', quantity: 1, price: 0 }]);
@@ -57,8 +60,26 @@ export default function FreelancerInvoiceGenerator() {
     }
   };
 
-  const handlePrint = () => {
-    window.print();
+  const handleDownloadPDF = async () => {
+    const element = document.getElementById('document-preview');
+    if (!element) return;
+    
+    setIsExporting(true);
+    try {
+      const canvas = await html2canvas(element, { scale: 2 });
+      const imgData = canvas.toDataURL('image/png');
+      const pdf = new jsPDF('p', 'mm', 'a4');
+      
+      const pdfWidth = pdf.internal.pageSize.getWidth();
+      const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
+      
+      pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
+      pdf.save(`Invoice-${invoiceNo}.pdf`);
+    } catch (error) {
+      console.error('Error generating PDF:', error);
+    } finally {
+      setIsExporting(false);
+    }
   };
 
   return (
@@ -101,10 +122,15 @@ export default function FreelancerInvoiceGenerator() {
               <Briefcase className="w-5 h-5 text-peach" /> Edit Invoice
             </h2>
             <button 
-              onClick={handlePrint}
-              className="bg-ink dark:bg-white text-white dark:text-ink px-4 py-2 rounded-full text-sm font-medium flex items-center gap-2 hover:opacity-90 transition-opacity"
+              onClick={handleDownloadPDF}
+              disabled={isExporting}
+              className="bg-ink dark:bg-white text-white dark:text-ink px-4 py-2 rounded-full text-sm font-medium flex items-center gap-2 hover:opacity-90 transition-opacity disabled:opacity-50"
             >
-              <Printer className="w-4 h-4" /> Save as PDF
+              {isExporting ? (
+                <>Generating...</>
+              ) : (
+                <><Download className="w-4 h-4" /> Download PDF</>
+              )}
             </button>
           </div>
           
@@ -192,7 +218,7 @@ export default function FreelancerInvoiceGenerator() {
         </div>
 
         {/* Preview / Print Section - 7 columns */}
-        <div className="xl:col-span-7 bg-white print:bg-white border border-ink/10 print:border-none shadow-lg print:shadow-none rounded-none p-4 sm:p-12 print:p-0 min-h-[80vh] text-black overflow-x-auto">
+        <div id="document-preview" className="xl:col-span-7 bg-white print:bg-white border border-ink/10 print:border-none shadow-lg print:shadow-none rounded-none p-4 sm:p-12 print:p-0 min-h-[80vh] text-black overflow-x-auto">
           
           <div className="flex justify-between items-start mb-12 min-w-[500px]">
             <div>

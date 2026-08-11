@@ -1,7 +1,9 @@
 'use client';
 
 import React, { useState } from 'react';
-import { Briefcase, Printer, Plus, Trash2, Mail, Phone, MapPin, Globe } from 'lucide-react';
+import { Briefcase, Printer, Plus, Trash2, Mail, Phone, MapPin, Globe, Download } from 'lucide-react';
+import html2canvas from 'html2canvas';
+import jsPDF from 'jspdf';
 import AdZone from '@/components/AdZone';
 
 interface Experience {
@@ -60,6 +62,7 @@ export default function ResumeBuilderPage() {
   ]);
 
   const [skills, setSkills] = useState('JavaScript, TypeScript, React, Next.js, Node.js, HTML/CSS, Tailwind, Git, AWS');
+  const [isExporting, setIsExporting] = useState(false);
 
   const handleInfoChange = (field: keyof typeof personalInfo, value: string) => {
     setPersonalInfo({ ...personalInfo, [field]: value });
@@ -89,8 +92,26 @@ export default function ResumeBuilderPage() {
     setEducation(education.filter(edu => edu.id !== id));
   };
 
-  const handlePrint = () => {
-    window.print();
+  const handleDownloadPDF = async () => {
+    const element = document.getElementById('document-preview');
+    if (!element) return;
+    
+    setIsExporting(true);
+    try {
+      const canvas = await html2canvas(element, { scale: 2 });
+      const imgData = canvas.toDataURL('image/png');
+      const pdf = new jsPDF('p', 'mm', 'a4');
+      
+      const pdfWidth = pdf.internal.pageSize.getWidth();
+      const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
+      
+      pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
+      pdf.save(`Resume.pdf`);
+    } catch (error) {
+      console.error('Error generating PDF:', error);
+    } finally {
+      setIsExporting(false);
+    }
   };
 
   return (
@@ -133,10 +154,15 @@ export default function ResumeBuilderPage() {
               <Briefcase className="w-5 h-5 text-lavender" /> Edit Details
             </h2>
             <button 
-              onClick={handlePrint}
-              className="bg-ink dark:bg-white text-white dark:text-ink px-4 py-2 rounded-full text-sm font-medium flex items-center gap-2 hover:opacity-90 transition-opacity"
+              onClick={handleDownloadPDF}
+              disabled={isExporting}
+              className="bg-ink dark:bg-white text-white dark:text-ink px-4 py-2 rounded-full text-sm font-medium flex items-center gap-2 hover:opacity-90 transition-opacity disabled:opacity-50"
             >
-              <Printer className="w-4 h-4" /> Save as PDF
+              {isExporting ? (
+                <>Generating...</>
+              ) : (
+                <><Download className="w-4 h-4" /> Download PDF</>
+              )}
             </button>
           </div>
           
@@ -220,7 +246,7 @@ export default function ResumeBuilderPage() {
 
         {/* Preview / Print Section - 7 columns */}
         {/* We enforce white background and black text specifically for the print preview pane */}
-        <div className="xl:col-span-7 bg-white print:bg-white border border-ink/10 print:border-none shadow-lg print:shadow-none rounded-none p-4 sm:p-12 print:p-0 min-h-[1056px] text-gray-900 font-sans overflow-x-auto">
+        <div id="document-preview" className="xl:col-span-7 bg-white print:bg-white border border-ink/10 print:border-none shadow-lg print:shadow-none rounded-none p-4 sm:p-12 print:p-0 min-h-[1056px] text-gray-900 font-sans overflow-x-auto">
           
           {/* Header */}
           <header className="border-b-2 border-gray-900 pb-6 mb-6 min-w-[500px]">
@@ -333,7 +359,7 @@ export default function ResumeBuilderPage() {
           </div>
           <div className="bg-white dark:bg-dark-card p-8 rounded-2xl border border-ink/10 dark:border-white/10 shadow-sm">
             <h3 className="font-medium mb-3 text-lg">How do I download my resume?</h3>
-            <p className="opacity-70 leading-relaxed">Click the "Save as PDF" button. This will open your browser&apos;s native print dialog, where you can select "Save as PDF" as the destination.</p>
+            <p className="opacity-70 leading-relaxed">Click the "Download PDF" button. The tool will automatically capture a pixel-perfect image of your resume and generate a downloadable PDF file.</p>
           </div>
         </div>
       </section>

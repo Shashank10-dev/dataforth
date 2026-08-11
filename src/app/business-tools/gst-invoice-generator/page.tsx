@@ -1,7 +1,9 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { FileText, Plus, Trash2, Printer, Building, Info } from 'lucide-react';
+import { FileText, Plus, Trash2, Printer, Building, Info, Download } from 'lucide-react';
+import html2canvas from 'html2canvas';
+import jsPDF from 'jspdf';
 import AdZone from '@/components/AdZone';
 
 interface InvoiceItem {
@@ -33,6 +35,7 @@ export default function GSTInvoiceGenerator() {
   
   const [notes, setNotes] = useState('Thank you for your business. Please make payment within 15 days.');
   const [bankDetails, setBankDetails] = useState('');
+  const [isExporting, setIsExporting] = useState(false);
   
   const addItem = () => {
     setItems([...items, { id: Math.random().toString(), description: '', hsn: '', quantity: 1, price: 0, gstRate: 18 }]);
@@ -87,8 +90,26 @@ export default function GSTInvoiceGenerator() {
     }).format(value);
   };
 
-  const handlePrint = () => {
-    window.print();
+  const handleDownloadPDF = async () => {
+    const element = document.getElementById('document-preview');
+    if (!element) return;
+    
+    setIsExporting(true);
+    try {
+      const canvas = await html2canvas(element, { scale: 2 });
+      const imgData = canvas.toDataURL('image/png');
+      const pdf = new jsPDF('p', 'mm', 'a4');
+      
+      const pdfWidth = pdf.internal.pageSize.getWidth();
+      const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
+      
+      pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
+      pdf.save(`Invoice-${invoiceNo}.pdf`);
+    } catch (error) {
+      console.error('Error generating PDF:', error);
+    } finally {
+      setIsExporting(false);
+    }
   };
 
   return (
@@ -131,10 +152,15 @@ export default function GSTInvoiceGenerator() {
               <Building className="w-5 h-5 text-peach" /> Edit Tax Invoice
             </h2>
             <button 
-              onClick={handlePrint}
-              className="bg-ink dark:bg-white text-white dark:text-ink px-4 py-2 rounded-full text-sm font-medium flex items-center gap-2 hover:opacity-90 transition-opacity"
+              onClick={handleDownloadPDF}
+              disabled={isExporting}
+              className="bg-ink dark:bg-white text-white dark:text-ink px-4 py-2 rounded-full text-sm font-medium flex items-center gap-2 hover:opacity-90 transition-opacity disabled:opacity-50"
             >
-              <Printer className="w-4 h-4" /> Save as PDF
+              {isExporting ? (
+                <>Generating...</>
+              ) : (
+                <><Download className="w-4 h-4" /> Download PDF</>
+              )}
             </button>
           </div>
           
@@ -254,7 +280,7 @@ export default function GSTInvoiceGenerator() {
         </div>
 
         {/* Preview / Print Section - 7 columns */}
-        <div className="xl:col-span-7 bg-white print:bg-white border border-ink/10 print:border-none shadow-lg print:shadow-none rounded-none p-4 sm:p-10 print:p-0 min-h-[80vh] text-black overflow-x-auto">
+        <div id="document-preview" className="xl:col-span-7 bg-white print:bg-white border border-ink/10 print:border-none shadow-lg print:shadow-none rounded-none p-4 sm:p-10 print:p-0 min-h-[80vh] text-black overflow-x-auto">
           
           <div className="text-center mb-8 border-b-2 border-gray-800 pb-4 min-w-[500px]">
             <h1 className="text-2xl font-bold tracking-widest text-black uppercase">TAX INVOICE</h1>
