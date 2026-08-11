@@ -3,7 +3,6 @@ import { Inter, Fraunces } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import ConsentBanner from "@/components/ConsentBanner";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import Script from "next/script";
@@ -43,7 +42,6 @@ export default function RootLayout({
           {children}
         </main>
         <Footer />
-        <ConsentBanner />
         
         {process.env.NEXT_PUBLIC_ADSENSE_CLIENT_ID && (
           <Script
