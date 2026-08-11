@@ -165,6 +165,12 @@ export default function Header() {
                 )}
               </div>
             ))}
+            <Link 
+              href="/blog"
+              className="px-3 py-2 rounded-lg text-sm font-medium text-ink/80 dark:text-white/80 hover:bg-white/50 dark:hover:bg-dark-card/50 hover:text-ink dark:hover:text-white transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-peach"
+            >
+              Blog
+            </Link>
           </nav>
 
           {/* Mobile Menu Toggle */}
@@ -218,7 +224,8 @@ export default function Header() {
               </div>
             ))}
             
-            <div className="mt-6 pt-4 border-t border-ink/10 dark:border-white/10 flex justify-center gap-6 text-sm font-medium">
+            <div className="mt-6 pt-4 border-t border-ink/10 dark:border-white/10 flex justify-center gap-6 text-sm font-medium flex-wrap">
+              <Link href="/blog" className="opacity-70 hover:opacity-100 text-peach">Blog</Link>
               <Link href="/about" className="opacity-70 hover:opacity-100">About</Link>
               <Link href="/privacy" className="opacity-70 hover:opacity-100">Privacy</Link>
               <Link href="/contact" className="opacity-70 hover:opacity-100">Contact</Link>
