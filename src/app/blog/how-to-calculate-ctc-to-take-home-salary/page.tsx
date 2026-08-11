@@ -1,6 +1,7 @@
 import React from 'react';
 import { Metadata } from 'next';
 import Link from 'next/link';
+import Image from 'next/image';
 import AdZone from '@/components/AdZone';
 import AuthorBio from '@/components/AuthorBio';
 
@@ -47,6 +48,10 @@ export default function BlogPost() {
         </p>
       </header>
       
+      <div className="mb-12 rounded-2xl overflow-hidden shadow-sm border border-ink/10 dark:border-white/10 aspect-[16/9] relative">
+        <Image src="/blog/ctc-salary.jpg" alt="CTC Salary Calculation" fill className="object-cover" priority />
+      </div>
+
       <AdZone className="mb-12 rounded-xl overflow-hidden" type="banner" />
 
       {/* Removed max-w-none and added mx-auto for better readability width */}

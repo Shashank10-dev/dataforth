@@ -65,7 +65,7 @@ export default function JsonFormatterPage() {
         <AdZone className="mx-auto rounded-xl overflow-hidden bg-transparent border-none max-w-4xl" type="banner" />
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 font-sans h-[600px]">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 font-sans lg:h-[600px] min-h-[600px]">
         
         {/* Input */}
         <div className="flex flex-col bg-white dark:bg-dark-card border border-ink/10 dark:border-white/10 rounded-[2rem] overflow-hidden shadow-sm">

@@ -375,6 +375,7 @@ export default function GSTInvoiceGenerator() {
           </div>
           
         </div>
+      </div>
   
       {/* FAQ Section */}
       <section className="mb-16 max-w-3xl mx-auto mt-16 print:hidden">
@@ -408,7 +409,6 @@ export default function GSTInvoiceGenerator() {
         </div>
       </section>
 
-    </div>
     </div>
   );
 }

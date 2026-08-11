@@ -265,6 +265,7 @@ export default function FreelancerInvoiceGenerator() {
           )}
           
         </div>
+      </div>
   
       {/* FAQ Section */}
       <section className="mb-16 max-w-3xl mx-auto mt-16 print:hidden">
@@ -298,7 +299,6 @@ export default function FreelancerInvoiceGenerator() {
         </div>
       </section>
 
-    </div>
     </div>
   );
 }

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Metadata } from 'next';
 import Link from 'next/link';
+import Image from 'next/image';
 import AdZone from '@/components/AdZone';
 import AuthorBio from '@/components/AuthorBio';
 
@@ -47,6 +48,10 @@ export default function BlogPost() {
         </p>
       </header>
       
+      <div className="mb-12 rounded-2xl overflow-hidden shadow-sm border border-ink/10 dark:border-white/10 aspect-[16/9] relative">
+        <Image src="/blog/gst-invoice.jpg" alt="GST Invoice for Freelancers" fill className="object-cover" priority />
+      </div>
+
       <AdZone className="mb-12 rounded-xl overflow-hidden" type="banner" />
 
       <div className="prose prose-lg dark:prose-invert prose-headings:font-heading prose-headings:font-medium prose-a:text-peach prose-a:no-underline hover:prose-a:underline mx-auto text-ink/90 dark:text-white/90 leading-relaxed">
