@@ -1,0 +1,50 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-heading: var(--font-fraunces), ui-serif, Georgia, serif;
+  
+  --color-cream: #FFFDF9;
+  --color-ink: #2A2626;
+  --color-lavender: #E0D4FF;
+  --color-peach: #FFD6C9;
+  --color-sage: #D4E4D4;
+  --color-powder: #C9E2FF;
+  
+  --color-dark-cream: #1A1515;
+  --color-dark-card: #251F1F;
+  --color-dark-text: #F5EBEB;
+}
+
+/* Custom base styles */
+@layer base {
+  body {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  
+  h1, h2 {
+    font-family: var(--font-heading);
+    letter-spacing: -0.02em;
+  }
+  
+  h3, h4, h5, h6 {
+    font-family: var(--font-sans);
+    letter-spacing: -0.01em;
+  }
+}
+
+/* Utilities */
+@layer utilities {
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  
+  .blob-shape {
+    border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
+  }
+}
