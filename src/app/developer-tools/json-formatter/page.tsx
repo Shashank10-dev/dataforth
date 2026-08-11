@@ -152,6 +152,7 @@ export default function JsonFormatterPage() {
             )}
           </div>
         </div>
+      </div>
         
   
       {/* FAQ Section */}
@@ -186,7 +187,6 @@ export default function JsonFormatterPage() {
         </div>
       </section>
 
-    </div>
     </div>
   );
 }
