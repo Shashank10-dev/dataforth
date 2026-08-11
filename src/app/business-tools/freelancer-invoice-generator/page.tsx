@@ -2,8 +2,6 @@
 
 import React, { useState, useEffect } from 'react';
 import { FileText, Plus, Trash2, Printer, Briefcase, Download } from 'lucide-react';
-import html2canvas from 'html2canvas';
-import { jsPDF } from 'jspdf';
 import AdZone from '@/components/AdZone';
 
 interface InvoiceItem {
@@ -66,7 +64,14 @@ export default function FreelancerInvoiceGenerator() {
     
     setIsExporting(true);
     try {
-      const canvas = await html2canvas(element, { scale: 2 });
+      const html2canvas = (await import('html2canvas')).default;
+      const { jsPDF } = await import('jspdf');
+
+      const canvas = await html2canvas(element, { 
+        scale: 2,
+        useCORS: true,
+        logging: true
+      });
       const imgData = canvas.toDataURL('image/png');
       const pdf = new jsPDF('p', 'mm', 'a4');
       
@@ -75,8 +80,9 @@ export default function FreelancerInvoiceGenerator() {
       
       pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
       pdf.save(`Invoice-${invoiceNo}.pdf`);
-    } catch (error) {
+    } catch (error: any) {
       console.error('Error generating PDF:', error);
+      alert(`PDF generation failed: ${error?.message || error}`);
     } finally {
       setIsExporting(false);
     }
