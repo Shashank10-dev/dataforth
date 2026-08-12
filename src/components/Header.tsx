@@ -58,6 +58,13 @@ const categories = [
     tools: [
       { name: 'Resume Builder', href: '/career-tools/resume-builder' },
     ]
+  },
+  {
+    name: 'WalkMe',
+    href: '/walkme-tools',
+    tools: [
+      { name: 'Selector Analyzer', href: '/walkme-tools/selector-analyzer' },
+    ]
   }
 ];
 

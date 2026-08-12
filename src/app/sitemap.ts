@@ -45,7 +45,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
     
     // Career Tools
     { url: '/career-tools', priority: 0.8, freq: 'weekly' },
-    { url: '/career-tools/resume-builder', priority: 0.9, freq: 'monthly' },
+    { url: '/career-tools/resume-builder', priority: 0.8, freq: 'monthly' },
+
+    // WalkMe Tools
+    { url: '/walkme-tools', priority: 0.8, freq: 'weekly' },
+    { url: '/walkme-tools/selector-analyzer', priority: 0.8, freq: 'monthly' },
   ];
   
   return routes.map((route) => ({
