@@ -64,21 +64,20 @@ export default function FreelancerInvoiceGenerator() {
     
     setIsExporting(true);
     try {
-      const html2canvas = (await import('html2canvas')).default;
+      const htmlToImage = await import('html-to-image');
       const { jsPDF } = await import('jspdf');
 
-      const canvas = await html2canvas(element, { 
-        scale: 2,
-        useCORS: true,
-        logging: true
+      const dataUrl = await htmlToImage.toPng(element, { 
+        quality: 1.0, 
+        pixelRatio: 2 
       });
-      const imgData = canvas.toDataURL('image/png');
       const pdf = new jsPDF('p', 'mm', 'a4');
       
+      const imgProps = pdf.getImageProperties(dataUrl);
       const pdfWidth = pdf.internal.pageSize.getWidth();
-      const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
+      const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
       
-      pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
+      pdf.addImage(dataUrl, 'PNG', 0, 0, pdfWidth, pdfHeight);
       pdf.save(`Invoice-${invoiceNo}.pdf`);
     } catch (error: any) {
       console.error('Error generating PDF:', error);
