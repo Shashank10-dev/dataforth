@@ -2,6 +2,8 @@
 
 import React, { useState, useEffect } from 'react';
 import { FileText, Plus, Trash2, Printer, Building, Info, Download } from 'lucide-react';
+import { pdf } from '@react-pdf/renderer';
+import GSTInvoicePDF from '@/components/pdf/GSTInvoicePDF';
 import AdZone from '@/components/AdZone';
 
 interface InvoiceItem {
@@ -89,26 +91,26 @@ export default function GSTInvoiceGenerator() {
   };
 
   const handleDownloadPDF = async () => {
-    const element = document.getElementById('document-preview');
-    if (!element) return;
-    
     setIsExporting(true);
     try {
-      const htmlToImage = await import('html-to-image');
-      const { jsPDF } = await import('jspdf');
-
-      const dataUrl = await htmlToImage.toPng(element, { 
-        quality: 1.0, 
-        pixelRatio: 2 
-      });
-      const pdf = new jsPDF('p', 'mm', 'a4');
+      const data = { 
+        invoiceNo, date, dueDate, 
+        fromName, fromEmail, fromAddress, fromGST, 
+        toName, toEmail, toAddress, toGST, 
+        items, currency, notes, bankDetails, 
+        subtotal, totalGstAmount, grandTotal 
+      };
       
-      const imgProps = pdf.getImageProperties(dataUrl);
-      const pdfWidth = pdf.internal.pageSize.getWidth();
-      const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
+      const blob = await pdf(<GSTInvoicePDF data={data} />).toBlob();
+      const url = URL.createObjectURL(blob);
       
-      pdf.addImage(dataUrl, 'PNG', 0, 0, pdfWidth, pdfHeight);
-      pdf.save(`Invoice-${invoiceNo}.pdf`);
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = `Invoice-${invoiceNo || 'GST'}.pdf`;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      URL.revokeObjectURL(url);
     } catch (error: any) {
       console.error('Error generating PDF:', error);
       alert(`PDF generation failed: ${error?.message || error}`);

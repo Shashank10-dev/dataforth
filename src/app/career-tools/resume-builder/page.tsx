@@ -2,6 +2,8 @@
 
 import React, { useState } from 'react';
 import { Briefcase, Printer, Plus, Trash2, Mail, Phone, MapPin, Globe, Download } from 'lucide-react';
+import { pdf } from '@react-pdf/renderer';
+import ResumePDF from '@/components/pdf/ResumePDF';
 import AdZone from '@/components/AdZone';
 
 interface Experience {
@@ -91,26 +93,20 @@ export default function ResumeBuilderPage() {
   };
 
   const handleDownloadPDF = async () => {
-    const element = document.getElementById('document-preview');
-    if (!element) return;
-    
     setIsExporting(true);
     try {
-      const htmlToImage = await import('html-to-image');
-      const { jsPDF } = await import('jspdf');
-
-      const dataUrl = await htmlToImage.toPng(element, { 
-        quality: 1.0, 
-        pixelRatio: 2 
-      });
-      const pdf = new jsPDF('p', 'mm', 'a4');
+      const data = { personalInfo, experience, education, skills };
       
-      const imgProps = pdf.getImageProperties(dataUrl);
-      const pdfWidth = pdf.internal.pageSize.getWidth();
-      const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
+      const blob = await pdf(<ResumePDF data={data} />).toBlob();
+      const url = URL.createObjectURL(blob);
       
-      pdf.addImage(dataUrl, 'PNG', 0, 0, pdfWidth, pdfHeight);
-      pdf.save(`Resume.pdf`);
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = `Resume-${personalInfo.name.replace(/\s+/g, '-') || 'Export'}.pdf`;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      URL.revokeObjectURL(url);
     } catch (error: any) {
       console.error('Error generating PDF:', error);
       alert(`PDF generation failed: ${error?.message || error}`);
