@@ -39,8 +39,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
     
     // Developer Tools
     { url: '/developer-tools', priority: 0.8, freq: 'weekly' },
-    { url: '/developer-tools/json-formatter', priority: 0.9, freq: 'monthly' },
-    { url: '/developer-tools/regex-tester', priority: 0.9, freq: 'monthly' },
+    { url: '/developer-tools/json-formatter', priority: 0.8, freq: 'monthly' },
+    { url: '/developer-tools/regex-tester', priority: 0.8, freq: 'monthly' },
+    { url: '/developer-tools/uuid-generator', priority: 0.8, freq: 'monthly' },
     
     // Career Tools
     { url: '/career-tools', priority: 0.8, freq: 'weekly' },

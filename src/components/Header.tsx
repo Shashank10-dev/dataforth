@@ -49,6 +49,7 @@ const categories = [
     tools: [
       { name: 'JSON Formatter', href: '/developer-tools/json-formatter' },
       { name: 'Regex Tester', href: '/developer-tools/regex-tester' },
+      { name: 'Bulk UUID Generator', href: '/developer-tools/uuid-generator' },
     ]
   },
   {

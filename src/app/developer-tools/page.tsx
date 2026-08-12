@@ -4,6 +4,7 @@ export default function DeveloperToolsCategory() {
   const tools = [
     { name: 'JSON Formatter', href: '/developer-tools/json-formatter', description: 'Format, validate, and minify JSON data instantly.' },
     { name: 'Regex Tester', href: '/developer-tools/regex-tester', description: 'Test and debug Regular Expressions with real-time highlighting.' },
+    { name: 'Bulk UUID Generator', href: '/developer-tools/uuid-generator', description: 'Generate up to 100,000 universally unique identifiers (v4) instantly.' },
   ];
 
   return (
