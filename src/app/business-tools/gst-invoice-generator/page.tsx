@@ -94,11 +94,13 @@ export default function GSTInvoiceGenerator() {
     setIsExporting(true);
     try {
       const data = { 
-        invoiceNo, date, dueDate, 
-        fromName, fromEmail, fromAddress, fromGST, 
-        toName, toEmail, toAddress, toGST, 
-        items, currency, notes, bankDetails, 
-        subtotal, totalGstAmount, grandTotal 
+        invoiceNo, date, dueDate: '', 
+        fromName, fromEmail: '', fromAddress, fromGST: fromGSTIN, 
+        toName, toEmail: '', toAddress, toGST: toGSTIN, 
+        items, currency: 'INR', notes, bankDetails, 
+        subtotal: totals.subtotal, 
+        totalGstAmount: totals.totalCgst + totals.totalSgst + totals.totalIgst, 
+        grandTotal: totals.grandTotal 
       };
       
       const blob = await pdf(<GSTInvoicePDF data={data} />).toBlob();
