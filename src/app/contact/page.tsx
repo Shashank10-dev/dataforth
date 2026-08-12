@@ -41,8 +41,16 @@ export default function ContactPage() {
       return;
     }
 
+    const accessKey = process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY;
+    
+    if (!accessKey) {
+      setStatus('error');
+      setErrorMessage('Configuration error: Access Key is missing. If testing locally, please restart your Next.js dev server. On Vercel, ensure the variable is applied to this deployment environment.');
+      return;
+    }
+
     // Web3Forms payload
-    formData.append("access_key", process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY || '');
+    formData.append("access_key", accessKey);
     formData.append("subject", `New message from ${name} on Dataforth`);
     formData.append("from_name", "Dataforth Contact Form");
     
