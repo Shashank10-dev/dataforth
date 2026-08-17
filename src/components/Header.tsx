@@ -19,6 +19,13 @@ const categories = [
     ]
   },
   {
+    name: 'Document',
+    href: '/document-tools',
+    tools: [
+      { name: 'Markdown Converter', href: '/document-tools/markdown-converter' },
+    ]
+  },
+  {
     name: 'Image',
     href: '/image-tools',
     tools: [

@@ -50,6 +50,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
     // WalkMe Tools
     { url: '/walkme-tools', priority: 0.8, freq: 'weekly' },
     { url: '/walkme-tools/selector-analyzer', priority: 0.8, freq: 'monthly' },
+
+    // Document Tools
+    { url: '/document-tools', priority: 0.8, freq: 'weekly' },
+    { url: '/document-tools/markdown-converter', priority: 0.8, freq: 'monthly' },
   ];
   
   return routes.map((route) => ({

@@ -319,6 +319,15 @@ export default function CompressPdfPage() {
               <p className="text-sm opacity-60">Combine multiple PDFs easily.</p>
             </div>
           </Link>
+          <Link href="/document-tools/markdown-converter" className="p-8 bg-white dark:bg-dark-card border border-ink/10 dark:border-white/10 rounded-2xl hover:shadow-lg hover:-translate-y-1 transition-all duration-150 flex items-center gap-5 group">
+            <div className="bg-[#FCD34D] text-ink p-4 rounded-full shrink-0 group-hover:scale-105 group-hover:rotate-3 transition-transform">
+              <FileText className="w-6 h-6" />
+            </div>
+            <div>
+              <h3 className="font-medium text-lg mb-1 group-hover:opacity-70 transition-opacity">Markdown Converter</h3>
+              <p className="text-sm opacity-60">Convert PDF, Word, and Excel to Markdown.</p>
+            </div>
+          </Link>
         </div>
       </section>
     </div>
