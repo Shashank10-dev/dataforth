@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import Image from 'next/image';
+import { categories } from '@/config/categories';
 
 export default function Footer() {
   return (
@@ -25,10 +26,13 @@ export default function Footer() {
           <div>
             <h3 className="font-heading text-lg font-bold text-ink dark:text-white mb-6">Tools</h3>
             <ul className="space-y-4 font-sans text-sm">
-              <li><Link href="/pdf-tools" className="text-ink/60 dark:text-white/60 hover:text-ink dark:hover:text-white transition-colors">PDF Tools</Link></li>
-              <li><Link href="/image-tools" className="text-ink/60 dark:text-white/60 hover:text-ink dark:hover:text-white transition-colors">Image Tools</Link></li>
-              <li><Link href="/finance-tools" className="text-ink/60 dark:text-white/60 hover:text-ink dark:hover:text-white transition-colors">Finance Calculators</Link></li>
-              <li><Link href="/developer-tools" className="text-ink/60 dark:text-white/60 hover:text-ink dark:hover:text-white transition-colors">Developer Utilities</Link></li>
+              {categories.map((category) => (
+                <li key={category.name}>
+                  <Link href={category.href} className="text-ink/60 dark:text-white/60 hover:text-ink dark:hover:text-white transition-colors">
+                    {category.title}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
           

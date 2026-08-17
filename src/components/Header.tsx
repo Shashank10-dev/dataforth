@@ -7,73 +7,7 @@ import { ChevronDown, Menu, X } from 'lucide-react';
 
 import Image from 'next/image';
 
-const categories = [
-  // ...
-
-  {
-    name: 'PDF',
-    href: '/pdf-tools',
-    tools: [
-      { name: 'Merge PDF', href: '/pdf-tools/merge-pdf' },
-      { name: 'Compress PDF', href: '/pdf-tools/compress-pdf' },
-    ]
-  },
-  {
-    name: 'Document',
-    href: '/document-tools',
-    tools: [
-      { name: 'Markdown Converter', href: '/document-tools/markdown-converter' },
-    ]
-  },
-  {
-    name: 'Image',
-    href: '/image-tools',
-    tools: [
-      { name: 'Compress Image', href: '/image-tools/compress-image' },
-      { name: 'HEIC to JPG', href: '/image-tools/convert-heic-to-jpg' },
-      { name: 'Remove Background', href: '/image-tools/remove-background' },
-    ]
-  },
-  {
-    name: 'Finance',
-    href: '/finance-tools',
-    tools: [
-      { name: 'EMI Calculator', href: '/finance-tools/emi-calculator' },
-      { name: 'Salary Calculator', href: '/finance-tools/salary-calculator' },
-    ]
-  },
-  {
-    name: 'Business',
-    href: '/business-tools',
-    tools: [
-      { name: 'GST Invoice', href: '/business-tools/gst-invoice-generator' },
-      { name: 'Freelancer Invoice', href: '/business-tools/freelancer-invoice-generator' },
-    ]
-  },
-  {
-    name: 'Developer',
-    href: '/developer-tools',
-    tools: [
-      { name: 'JSON Formatter', href: '/developer-tools/json-formatter' },
-      { name: 'Regex Tester', href: '/developer-tools/regex-tester' },
-      { name: 'Bulk UUID Generator', href: '/developer-tools/uuid-generator' },
-    ]
-  },
-  {
-    name: 'Career',
-    href: '/career-tools',
-    tools: [
-      { name: 'Resume Builder', href: '/career-tools/resume-builder' },
-    ]
-  },
-  {
-    name: 'WalkMe',
-    href: '/walkme-tools',
-    tools: [
-      { name: 'Selector Analyzer', href: '/walkme-tools/selector-analyzer' },
-    ]
-  }
-];
+import { categories } from '@/config/categories';
 
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);

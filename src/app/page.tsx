@@ -2,43 +2,7 @@ import Link from "next/link";
 import { FileUp, Image as ImageIcon, Briefcase, Code, FileText, ChevronRight } from "lucide-react";
 import AdZone from "@/components/AdZone";
 
-const categories = [
-  {
-    title: "PDF Tools",
-    description: "Merge, compress, and convert PDF documents securely.",
-    icon: FileUp,
-    href: "/pdf-tools",
-    color: "bg-lavender text-ink"
-  },
-  {
-    title: "Image Tools",
-    description: "Remove backgrounds, convert formats, and compress photos.",
-    icon: ImageIcon,
-    href: "/image-tools",
-    color: "bg-peach text-ink"
-  },
-  {
-    title: "Finance Calculators",
-    description: "Calculate loans, ROI, and plan your budget easily.",
-    icon: FileText,
-    href: "/finance-tools",
-    color: "bg-sage text-ink"
-  },
-  {
-    title: "Business Generators",
-    description: "Generate invoices, signatures, and essential business docs.",
-    icon: Briefcase,
-    href: "/business-tools",
-    color: "bg-powder text-ink"
-  },
-  {
-    title: "Developer Utilities",
-    description: "Format JSON, encode Base64, and quickly hash strings.",
-    icon: Code,
-    href: "/developer-tools",
-    color: "bg-[#F3E8E0] text-ink"
-  }
-];
+import { categories } from '@/config/categories';
 
 export default function Home() {
   return (
