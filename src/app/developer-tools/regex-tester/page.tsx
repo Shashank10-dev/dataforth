@@ -103,7 +103,7 @@ export default function RegexTesterPage() {
       </div>
 
       <div className="mb-12">
-        <AdZone className="mx-auto rounded-xl overflow-hidden bg-transparent border-none max-w-4xl" type="banner" />
+        {/* <AdZone className="mx-auto rounded-xl overflow-hidden bg-transparent border-none max-w-4xl" type="banner" /> */}
       </div>
 
       <div className="font-sans space-y-8">

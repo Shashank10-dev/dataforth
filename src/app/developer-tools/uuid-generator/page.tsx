@@ -138,7 +138,7 @@ export default function UuidGeneratorPage() {
       </div>
 
       <div className="mb-12">
-        <AdZone className="mx-auto rounded-xl overflow-hidden bg-transparent border-none max-w-4xl" type="banner" />
+        {/* <AdZone className="mx-auto rounded-xl overflow-hidden bg-transparent border-none max-w-4xl" type="banner" /> */}
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 font-sans max-w-5xl mx-auto">
@@ -311,7 +311,7 @@ export default function UuidGeneratorPage() {
       </div>
 
       <div className="mt-20">
-        <AdZone className="mx-auto rounded-xl overflow-hidden bg-transparent border-none max-w-4xl" type="banner" />
+        {/* <AdZone className="mx-auto rounded-xl overflow-hidden bg-transparent border-none max-w-4xl" type="banner" /> */}
       </div>
 
       <div className="max-w-4xl mx-auto mt-16 font-sans">

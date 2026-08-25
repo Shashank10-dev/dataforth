@@ -149,7 +149,7 @@ export default function GSTInvoiceGenerator() {
       </div>
       
       <div className="mb-8 print:hidden">
-        <AdZone className="mx-auto rounded-xl overflow-hidden bg-transparent border-none max-w-4xl" type="banner" />
+        {/* <AdZone className="mx-auto rounded-xl overflow-hidden bg-transparent border-none max-w-4xl" type="banner" /> */}
       </div>
 
       <div className="grid grid-cols-1 xl:grid-cols-12 gap-8 items-start font-sans print:block">

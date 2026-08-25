@@ -128,11 +128,11 @@ export default function EMICalculatorPage() {
         </p>
       </div>
 
-      <div className="max-w-4xl mx-auto mb-12 relative z-10">
+      {/* <div className="max-w-4xl mx-auto mb-12 relative z-10">
         <div className="p-1 border border-ink/5 dark:border-white/5 bg-white/50 dark:bg-dark-card/50 backdrop-blur-md rounded-2xl max-w-4xl mx-auto">
           <AdZone className="mx-auto rounded-xl overflow-hidden bg-transparent border-none" type="banner" />
         </div>
-      </div>
+      </div> */}
 
       <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8 items-start font-sans">
         

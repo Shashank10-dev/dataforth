@@ -217,7 +217,7 @@ export default function SelectorAnalyzerPage() {
       </div>
 
       <div className="mb-12">
-        <AdZone className="mx-auto rounded-xl overflow-hidden bg-transparent border-none max-w-4xl" type="banner" />
+        {/* <AdZone className="mx-auto rounded-xl overflow-hidden bg-transparent border-none max-w-4xl" type="banner" /> */}
       </div>
 
       {/* Mini-Guide */}
@@ -363,7 +363,7 @@ export default function SelectorAnalyzerPage() {
       </div>
 
       <div className="mt-20">
-        <AdZone className="mx-auto rounded-xl overflow-hidden bg-transparent border-none max-w-4xl" type="banner" />
+        {/* <AdZone className="mx-auto rounded-xl overflow-hidden bg-transparent border-none max-w-4xl" type="banner" /> */}
       </div>
 
       {/* FAQ */}

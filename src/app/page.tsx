@@ -132,11 +132,11 @@ export default function Home() {
       </section>
 
       {/* Ad Zone - Mid */}
-      <div className="max-w-7xl mx-auto w-full px-4 mb-20 relative z-10">
+      {/* <div className="max-w-7xl mx-auto w-full px-4 mb-20 relative z-10">
         <div className="p-1 border border-ink/5 dark:border-white/5 bg-white/50 dark:bg-dark-card/50 backdrop-blur-md rounded-2xl max-w-4xl mx-auto">
           <AdZone type="banner" className="mx-auto rounded-xl overflow-hidden bg-transparent border-none" />
         </div>
-      </div>
+      </div> */}
 
       {/* Categories Grid (Discovery) */}
       <section className="px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full pb-32 relative z-10">
@@ -170,11 +170,11 @@ export default function Home() {
       </section>
 
       {/* Ad Zone - Bottom */}
-      <div className="max-w-7xl mx-auto w-full px-4 pb-24 relative z-10">
+      {/* <div className="max-w-7xl mx-auto w-full px-4 pb-24 relative z-10">
         <div className="p-1 border border-ink/5 dark:border-white/5 bg-white/50 dark:bg-dark-card/50 backdrop-blur-md rounded-2xl max-w-4xl mx-auto">
           <AdZone type="banner" className="mx-auto rounded-xl overflow-hidden bg-transparent border-none" />
         </div>
-      </div>
+      </div> */}
     </div>
   );
 }

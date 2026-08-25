@@ -112,11 +112,11 @@ export default function RemoveBackgroundPage() {
         </p>
       </div>
 
-      <div className="max-w-4xl mx-auto mb-12 relative z-10">
+      {/* <div className="max-w-4xl mx-auto mb-12 relative z-10">
         <div className="p-1 border border-ink/5 dark:border-white/5 bg-white/50 dark:bg-dark-card/50 backdrop-blur-md rounded-2xl max-w-4xl mx-auto">
           <AdZone className="mx-auto rounded-xl overflow-hidden bg-transparent border-none" type="banner" />
         </div>
-      </div>
+      </div> */}
 
       <div className="max-w-3xl mx-auto">
         {error && (
@@ -227,11 +227,11 @@ export default function RemoveBackgroundPage() {
         )}
       </div>
 
-      <div className="max-w-4xl mx-auto mt-16 mb-16 relative z-10">
+      {/* <div className="max-w-4xl mx-auto mt-16 mb-16 relative z-10">
         <div className="p-1 border border-ink/5 dark:border-white/5 bg-white/50 dark:bg-dark-card/50 backdrop-blur-md rounded-2xl max-w-4xl mx-auto">
           <AdZone className="mx-auto rounded-xl overflow-hidden bg-transparent border-none" type="banner" />
         </div>
-      </div>
+      </div> */}
     </div>
   );
 }

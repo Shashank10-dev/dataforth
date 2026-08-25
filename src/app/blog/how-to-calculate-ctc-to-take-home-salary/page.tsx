@@ -52,7 +52,7 @@ export default function BlogPost() {
         <Image src="/blog/ctc-salary.jpg" alt="CTC Salary Calculation" fill className="object-cover" priority />
       </div>
 
-      <AdZone className="mb-12 rounded-xl overflow-hidden" type="banner" />
+      {/* <AdZone className="mb-12 rounded-xl overflow-hidden" type="banner" /> */}
 
       {/* Removed max-w-none and added mx-auto for better readability width */}
       <div className="prose prose-lg dark:prose-invert prose-headings:font-heading prose-headings:font-medium prose-a:text-sage prose-a:no-underline hover:prose-a:underline mx-auto text-ink/90 dark:text-white/90 leading-relaxed">
