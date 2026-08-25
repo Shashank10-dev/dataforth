@@ -6,6 +6,7 @@ import { usePathname } from 'next/navigation';
 import { ChevronDown, Menu, X } from 'lucide-react';
 
 import Image from 'next/image';
+import HeaderSearch from './HeaderSearch';
 
 import { categories } from '@/config/categories';
 
@@ -71,62 +72,83 @@ export default function Header() {
 
           {/* Desktop Navigation */}
           <nav className="hidden lg:flex gap-1 h-full items-center">
-            {categories.map((category) => (
-              <div 
-                key={category.name}
-                className="relative h-full flex items-center"
-                onMouseEnter={() => handleMouseEnter(category.name)}
-                onMouseLeave={handleMouseLeave}
-              >
-                <Link 
-                  href={category.href}
-                  className="flex items-center gap-1 px-3 py-2 rounded-lg text-sm font-medium text-ink/80 dark:text-white/80 hover:bg-white/50 dark:hover:bg-dark-card/50 hover:text-ink dark:hover:text-white transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-peach"
-                  onFocus={() => handleMouseEnter(category.name)}
-                  onBlur={(e) => {
-                    // Only close if moving outside this dropdown container
-                    if (!e.currentTarget.parentElement?.contains(e.relatedTarget as Node)) {
-                      setActiveDropdown(null);
-                    }
-                  }}
+            {categories.map((category) => {
+              const isActive = pathname.startsWith(category.href);
+              return (
+                <div 
+                  key={category.name}
+                  className="relative h-full flex items-center"
+                  onMouseEnter={() => handleMouseEnter(category.name)}
+                  onMouseLeave={handleMouseLeave}
                 >
-                  {category.name}
-                  <ChevronDown className={`w-3 h-3 transition-transform duration-200 ${activeDropdown === category.name ? 'rotate-180' : ''}`} />
-                </Link>
+                  <Link 
+                    href={category.href}
+                    className={`flex items-center gap-1 px-3 py-2 rounded-lg text-sm font-medium transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-peach ${
+                      isActive 
+                        ? 'text-ink dark:text-white bg-white/50 dark:bg-dark-card/50 shadow-sm' 
+                        : 'text-ink/80 dark:text-white/80 hover:bg-white/50 dark:hover:bg-dark-card/50 hover:text-ink dark:hover:text-white'
+                    }`}
+                    onFocus={() => handleMouseEnter(category.name)}
+                    onBlur={(e) => {
+                      // Only close if moving outside this dropdown container
+                      if (!e.currentTarget.parentElement?.contains(e.relatedTarget as Node)) {
+                        setActiveDropdown(null);
+                      }
+                    }}
+                  >
+                    {category.name}
+                    <ChevronDown className={`w-3 h-3 transition-transform duration-200 ${activeDropdown === category.name ? 'rotate-180' : ''}`} />
+                  </Link>
 
-                {/* Desktop Dropdown */}
-                {activeDropdown === category.name && (
-                  <div className="absolute top-[calc(100%-8px)] left-0 w-64 bg-white dark:bg-dark-card border border-ink/10 dark:border-white/10 rounded-2xl shadow-xl py-2 opacity-100 transition-opacity animate-in fade-in slide-in-from-top-2 duration-200">
-                    <div className="px-4 py-2 mb-1 border-b border-ink/5 dark:border-white/5">
-                      <Link href={category.href} className="text-xs font-bold uppercase tracking-wider text-ink/50 dark:text-white/50 hover:text-ink dark:hover:text-white focus:outline-none focus-visible:underline">
-                        View all {category.name} tools &rarr;
-                      </Link>
+                  {/* Desktop Dropdown */}
+                  {activeDropdown === category.name && (
+                    <div className="absolute top-[calc(100%-8px)] left-0 w-64 bg-white dark:bg-dark-card border border-ink/10 dark:border-white/10 rounded-2xl shadow-xl py-2 opacity-100 transition-opacity animate-in fade-in slide-in-from-top-2 duration-200">
+                      <div className="px-4 py-2 mb-1 border-b border-ink/5 dark:border-white/5">
+                        <Link href={category.href} className="text-xs font-bold uppercase tracking-wider text-ink/50 dark:text-white/50 hover:text-ink dark:hover:text-white focus:outline-none focus-visible:underline">
+                          View all {category.name} tools &rarr;
+                        </Link>
+                      </div>
+                      {category.tools.map((tool) => {
+                        const isToolActive = pathname === tool.href;
+                        return (
+                          <Link 
+                            key={tool.name}
+                            href={tool.href}
+                            className={`block px-4 py-2 text-sm transition-colors focus:outline-none focus-visible:bg-peach/10 dark:focus-visible:bg-peach/20 ${
+                              isToolActive 
+                                ? 'text-peach dark:text-peach font-medium bg-peach/5 dark:bg-peach/10'
+                                : 'text-ink/80 dark:text-white/80 hover:bg-peach/10 dark:hover:bg-peach/20 hover:text-ink dark:hover:text-white'
+                            }`}
+                          >
+                            {tool.name}
+                          </Link>
+                        );
+                      })}
                     </div>
-                    {category.tools.map((tool) => (
-                      <Link 
-                        key={tool.name}
-                        href={tool.href}
-                        className="block px-4 py-2 text-sm text-ink/80 dark:text-white/80 hover:bg-peach/10 dark:hover:bg-peach/20 hover:text-ink dark:hover:text-white transition-colors focus:outline-none focus-visible:bg-peach/10 dark:focus-visible:bg-peach/20"
-                      >
-                        {tool.name}
-                      </Link>
-                    ))}
-                  </div>
-                )}
-              </div>
-            ))}
+                  )}
+                </div>
+              );
+            })}
             <Link 
               href="/blog"
-              className="px-3 py-2 rounded-lg text-sm font-medium text-ink/80 dark:text-white/80 hover:bg-white/50 dark:hover:bg-dark-card/50 hover:text-ink dark:hover:text-white transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-peach"
+              className={`px-3 py-2 rounded-lg text-sm font-medium transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-peach ${
+                pathname.startsWith('/blog') 
+                  ? 'text-ink dark:text-white bg-white/50 dark:bg-dark-card/50 shadow-sm'
+                  : 'text-ink/80 dark:text-white/80 hover:bg-white/50 dark:hover:bg-dark-card/50 hover:text-ink dark:hover:text-white'
+              }`}
             >
               Blog
             </Link>
           </nav>
 
-          {/* Mobile Menu Toggle */}
-          <div className="lg:hidden flex items-center z-50">
+          {/* Right Actions */}
+          <div className="flex items-center gap-2 z-50">
+            <HeaderSearch />
+            
+            {/* Mobile Menu Toggle */}
             <button 
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="text-ink dark:text-white opacity-80 hover:opacity-100 p-2 focus:outline-none focus-visible:ring-2 focus-visible:ring-peach rounded-md"
+              className="lg:hidden text-ink dark:text-white opacity-80 hover:opacity-100 p-2 focus:outline-none focus-visible:ring-2 focus-visible:ring-peach rounded-md"
               aria-label="Toggle mobile menu"
               aria-expanded={mobileMenuOpen}
             >

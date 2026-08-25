@@ -3,6 +3,8 @@
 import React, { useState, useEffect } from 'react';
 import { Calculator, IndianRupee, PieChart, Info, Building } from 'lucide-react';
 import AdZone from '@/components/AdZone';
+import Breadcrumbs from '@/components/ui/Breadcrumbs';
+import Disclaimer from '@/components/ui/Disclaimer';
 
 export default function SalaryCalculatorPage() {
   const [ctc, setCtc] = useState<number>(1200000);
@@ -98,6 +100,7 @@ export default function SalaryCalculatorPage() {
           })
         }}
       />
+      <Breadcrumbs />
       <div className="text-center mb-12 relative">
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 h-32 bg-sage/40 dark:bg-sage/10 blob-shape -z-10 blur-2xl"></div>
         <h1 className="text-5xl font-medium mb-4">Salary & CTC Calculator</h1>
@@ -212,11 +215,10 @@ export default function SalaryCalculatorPage() {
             </div>
           </div>
 
-          <div className="bg-orange-50 dark:bg-orange-950/20 border border-orange-200 dark:border-orange-900/30 rounded-xl p-4 mt-6 text-sm flex gap-3 text-orange-800 dark:text-orange-200">
-            <Info className="w-5 h-5 shrink-0" />
-            <p className="opacity-90">
-              <strong>Disclaimer:</strong> This tool provides estimates based on standard Indian payroll calculations and is not financial/tax advice. Your actual offer letter and take-home pay may vary based on company-specific allowances, flexi-benefits, and your chosen income tax regime. Consult a professional for exact figures.
-            </p>
+          <div className="mt-6">
+            <Disclaimer title="Disclaimer" tone="formal">
+              This tool provides estimates based on standard Indian payroll calculations and is not financial/tax advice. Your actual offer letter and take-home pay may vary based on company-specific allowances, flexi-benefits, and your chosen income tax regime. Consult a professional for exact figures.
+            </Disclaimer>
           </div>
         </div>
       </div>

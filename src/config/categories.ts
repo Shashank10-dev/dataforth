@@ -3,6 +3,8 @@ import { LucideIcon } from "lucide-react";
 
 export interface ToolItem {
   name: string;
+  description: string;
+  keywords: string[];
   href: string;
 }
 
@@ -25,20 +27,18 @@ export const categories: CategoryItem[] = [
     color: 'bg-lavender text-ink',
     icon: FileUp,
     tools: [
-      { name: 'Merge PDF', href: '/pdf-tools/merge-pdf' },
-      { name: 'Compress PDF', href: '/pdf-tools/compress-pdf' },
-    ]
-  },
-  {
-    name: 'Document',
-    title: 'Document Tools',
-    description: 'Convert between different document formats locally.',
-    href: '/document-tools',
-    color: 'bg-[#FCD34D] text-ink',
-    icon: FileText,
-    tools: [
-      { name: 'Markdown Converter', href: '/document-tools/markdown-converter' },
-      { name: 'Markdown Viewer', href: '/document-tools/markdown-viewer' },
+      { 
+        name: 'Compress PDF', 
+        description: 'Reduce PDF file size securely in your browser.', 
+        keywords: ['shrink pdf', 'reduce pdf size', 'make pdf smaller', 'compressor', 'optimize pdf', 'squash pdf'], 
+        href: '/pdf-tools/compress-pdf' 
+      },
+      { 
+        name: 'Merge PDF', 
+        description: 'Combine multiple PDFs into a single file completely locally.', 
+        keywords: ['combine pdf', 'join pdf', 'append pdf', 'bind pdf', 'pdf merger', 'mix pdf'], 
+        href: '/pdf-tools/merge-pdf' 
+      },
     ]
   },
   {
@@ -49,46 +49,46 @@ export const categories: CategoryItem[] = [
     color: 'bg-peach text-ink',
     icon: ImageIcon,
     tools: [
-      { name: 'Compress Image', href: '/image-tools/compress-image' },
-      { name: 'HEIC to JPG', href: '/image-tools/convert-heic-to-jpg' },
-      { name: 'Remove Background', href: '/image-tools/remove-background' },
+      { 
+        name: 'Compress Image', 
+        description: 'Reduce image file size without losing quality.', 
+        keywords: ['shrink photo', 'reduce image', 'make picture smaller', 'jpeg compress', 'png compress'], 
+        href: '/image-tools/compress-image' 
+      },
+      { 
+        name: 'HEIC to JPG', 
+        description: 'Convert iPhone HEIC photos to JPG format.', 
+        keywords: ['iphone photo to jpg', 'apple image converter', 'heif to jpeg', 'heic converter'], 
+        href: '/image-tools/convert-heic-to-jpg' 
+      },
+      { 
+        name: 'Remove Background', 
+        description: 'Erase backgrounds from images automatically using AI.', 
+        keywords: ['transparent background', 'erase background', 'bg remover', 'cutout image', 'magic wand', 'png transparent'], 
+        href: '/image-tools/remove-background' 
+      },
     ]
   },
   {
-    name: 'Finance',
-    title: 'Finance Calculators',
-    description: 'Calculate loans, ROI, and plan your budget easily.',
-    href: '/finance-tools',
-    color: 'bg-sage text-ink',
+    name: 'Document',
+    title: 'Document Tools',
+    description: 'Convert between different document formats locally.',
+    href: '/document-tools',
+    color: 'bg-[#FCD34D] text-ink',
     icon: FileText,
     tools: [
-      { name: 'EMI Calculator', href: '/finance-tools/emi-calculator' },
-      { name: 'Salary Calculator', href: '/finance-tools/salary-calculator' },
-    ]
-  },
-  {
-    name: 'Business',
-    title: 'Business Generators',
-    description: 'Generate invoices, signatures, and essential business docs.',
-    href: '/business-tools',
-    color: 'bg-powder text-ink',
-    icon: Briefcase,
-    tools: [
-      { name: 'GST Invoice', href: '/business-tools/gst-invoice-generator' },
-      { name: 'Freelancer Invoice', href: '/business-tools/freelancer-invoice-generator' },
-    ]
-  },
-  {
-    name: 'Developer',
-    title: 'Developer Utilities',
-    description: 'Format JSON, encode Base64, and quickly hash strings.',
-    href: '/developer-tools',
-    color: 'bg-[#F3E8E0] text-ink',
-    icon: Code,
-    tools: [
-      { name: 'JSON Formatter', href: '/developer-tools/json-formatter' },
-      { name: 'Regex Tester', href: '/developer-tools/regex-tester' },
-      { name: 'Bulk UUID Generator', href: '/developer-tools/uuid-generator' },
+      { 
+        name: 'Markdown Converter', 
+        description: 'Convert Word, PowerPoint, Excel, and PDF files into Markdown.', 
+        keywords: ['docx to md', 'pdf to markdown', 'excel to md', 'ppt to markdown', 'convert document'], 
+        href: '/document-tools/markdown-converter' 
+      },
+      { 
+        name: 'Markdown Viewer', 
+        description: 'View, format, and render Markdown files entirely in your browser.', 
+        keywords: ['read md file', 'markdown preview', 'render markdown', 'open md', 'md editor'], 
+        href: '/document-tools/markdown-viewer' 
+      },
     ]
   },
   {
@@ -99,7 +99,84 @@ export const categories: CategoryItem[] = [
     color: 'bg-[#E0D4FF] text-ink',
     icon: LayoutTemplate,
     tools: [
-      { name: 'Resume Builder', href: '/career-tools/resume-builder' },
+      { 
+        name: 'Resume Builder', 
+        description: 'Create a professional resume in minutes.', 
+        keywords: ['cv maker', 'build resume', 'job application', 'resume generator', 'resume creator'], 
+        href: '/career-tools/resume-builder' 
+      },
+    ]
+  },
+  {
+    name: 'Finance',
+    title: 'Finance Calculators',
+    description: 'Calculate loans, ROI, and plan your budget easily.',
+    href: '/finance-tools',
+    color: 'bg-sage text-ink',
+    icon: FileText,
+    tools: [
+      { 
+        name: 'EMI Calculator', 
+        description: 'Calculate Equated Monthly Installments for loans.', 
+        keywords: ['loan calculator', 'mortgage calculator', 'car loan', 'home loan', 'monthly payment'], 
+        href: '/finance-tools/emi-calculator' 
+      },
+      { 
+        name: 'Salary Calculator', 
+        description: 'Convert CTC to take-home salary and breakdown deductions.', 
+        keywords: ['take home salary', 'ctc calculator', 'net pay', 'in hand salary'], 
+        href: '/finance-tools/salary-calculator' 
+      },
+    ]
+  },
+  {
+    name: 'Business',
+    title: 'Business Generators',
+    description: 'Generate invoices, signatures, and essential business docs.',
+    href: '/business-tools',
+    color: 'bg-powder text-ink',
+    icon: Briefcase,
+    tools: [
+      { 
+        name: 'GST Invoice', 
+        description: 'Generate compliant GST invoices for Indian businesses.', 
+        keywords: ['tax invoice', 'gst bill maker', 'b2b invoice', 'generate bill', 'india gst'], 
+        href: '/business-tools/gst-invoice-generator' 
+      },
+      { 
+        name: 'Freelancer Invoice', 
+        description: 'Create clean, professional invoices for freelance work.', 
+        keywords: ['simple invoice', 'contractor bill', 'freelance bill', 'invoice maker', 'receipt generator'], 
+        href: '/business-tools/freelancer-invoice-generator' 
+      },
+    ]
+  },
+  {
+    name: 'Developer',
+    title: 'Developer Utilities',
+    description: 'Format JSON, encode Base64, and quickly hash strings.',
+    href: '/developer-tools',
+    color: 'bg-[#F3E8E0] text-ink',
+    icon: Code,
+    tools: [
+      { 
+        name: 'JSON Formatter', 
+        description: 'Format, validate, and prettify JSON strings.', 
+        keywords: ['beautify json', 'json validator', 'parse json', 'pretty print json', 'format json'], 
+        href: '/developer-tools/json-formatter' 
+      },
+      { 
+        name: 'Regex Tester', 
+        description: 'Test and debug regular expressions in the browser.', 
+        keywords: ['regex matcher', 'regular expression', 'regex evaluator', 'test regex', 'match string'], 
+        href: '/developer-tools/regex-tester' 
+      },
+      { 
+        name: 'Bulk UUID Generator', 
+        description: 'Generate thousands of random UUIDs/GUIDs instantly.', 
+        keywords: ['guid generator', 'v4 uuid', 'random id maker', 'bulk guid', 'unique identifier'], 
+        href: '/developer-tools/uuid-generator' 
+      },
     ]
   },
   {
@@ -110,7 +187,12 @@ export const categories: CategoryItem[] = [
     color: 'bg-[#A7F3D0] text-ink',
     icon: Wrench,
     tools: [
-      { name: 'Selector Analyzer', href: '/walkme-tools/selector-analyzer' },
+      { 
+        name: 'Selector Analyzer', 
+        description: 'Analyze WalkMe jQuery selectors for robustness and fragility.', 
+        keywords: ['css selector', 'walkme builder', 'element selector', 'jquery analyzer', 'selector robustness'], 
+        href: '/walkme-tools/selector-analyzer' 
+      },
     ]
   }
 ];

@@ -4,6 +4,8 @@ import React, { useState, useRef, useEffect } from 'react';
 import { UploadCloud, FileText, Check, Copy, Download, AlertCircle, Info, Eye, Code, FileDown } from 'lucide-react';
 import AdZone from '@/components/AdZone';
 import Link from 'next/link';
+import Breadcrumbs from '@/components/ui/Breadcrumbs';
+import Disclaimer from '@/components/ui/Disclaimer';
 
 export default function MarkdownViewerPage() {
   const [markdown, setMarkdown] = useState<string>('');
@@ -225,6 +227,7 @@ export default function MarkdownViewerPage() {
 
   return (
     <div className="container mx-auto px-4 py-16 max-w-7xl flex-grow">
+      <Breadcrumbs />
       
       <script
         type="application/ld+json"
@@ -353,15 +356,9 @@ export default function MarkdownViewerPage() {
             </div>
           )}
 
-          <div className="bg-cream/40 dark:bg-dark-cream/40 border border-ink/5 dark:border-white/5 rounded-2xl p-5 flex gap-4 text-sm font-sans items-start mt-auto">
-            <Info className="w-5 h-5 text-[#F59E0B] flex-shrink-0 mt-0.5" />
-            <div>
-              <p className="font-medium mb-1">Strictly Local Parsing</p>
-              <p className="opacity-70 leading-relaxed">
-                Your Markdown is parsed and sanitized natively in your browser using DOMPurify. This ensures any embedded HTML is stripped of malicious scripts before rendering, protecting you from XSS attacks when viewing untrusted files.
-              </p>
-            </div>
-          </div>
+          <Disclaimer title="Strictly Local Parsing" tone="technical">
+            Your Markdown is parsed and sanitized natively in your browser using DOMPurify. This ensures any embedded HTML is stripped of malicious scripts before rendering, protecting you from XSS attacks when viewing untrusted files.
+          </Disclaimer>
         </div>
 
         {/* Output Column */}
