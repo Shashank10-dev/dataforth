@@ -9,11 +9,11 @@ const MAX_FILE_SIZE_MB = 50;
 
 export default function CompressPdfPage() {
   const [file, setFile] = useState<File | null>(null);
-  const [quality, setQuality] = useState<'low' | 'medium' | 'high'>('medium');
+  const [compressionLevel, setCompressionLevel] = useState<'low' | 'medium' | 'high'>('medium');
   const [error, setError] = useState<string | null>(null);
   const [isProcessing, setIsProcessing] = useState(false);
   const [progressMsg, setProgressMsg] = useState<string>('');
-  const [result, setResult] = useState<{ url: string, originalSize: number, newSize: number } | null>(null);
+  const [result, setResult] = useState<{ url: string, originalSize: number, newSize: number, imagesProcessed: number } | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -47,7 +47,7 @@ export default function CompressPdfPage() {
     const worker = new Worker(new URL('../../../workers/pdfCompress.worker.ts', import.meta.url));
 
     worker.onmessage = (e) => {
-      const { success, blob, error, type, data } = e.data;
+      const { success, blob, error, type, data, imagesProcessed } = e.data;
       if (type === 'progress') {
         setProgressMsg(data);
         return;
@@ -59,7 +59,8 @@ export default function CompressPdfPage() {
         setResult({
           url,
           originalSize: file.size,
-          newSize: e.data.blob.size
+          newSize: e.data.blob.size,
+          imagesProcessed: imagesProcessed || 0
         });
       } else {
         setError(e.data.error || 'Failed to compress PDF.');
@@ -73,7 +74,10 @@ export default function CompressPdfPage() {
       worker.terminate();
     };
 
-    worker.postMessage({ file, quality });
+    // Note: in UI we flipped to "Compression Level", so high compression = low quality
+    // To not break the worker logic, we map: High Compression -> 'low' quality
+    const qualityMap = { low: 'high', medium: 'medium', high: 'low' } as const;
+    worker.postMessage({ file, quality: qualityMap[compressionLevel] });
   };
 
   const formatSize = (bytes: number) => (bytes / 1024 / 1024).toFixed(2) + ' MB';
@@ -173,23 +177,23 @@ export default function CompressPdfPage() {
                 <div className="mb-10">
                   <label className="block text-sm font-medium mb-4 opacity-80 text-center">Select Compression Level</label>
                   <div className="grid grid-cols-3 gap-3">
-                    {(['low', 'medium', 'high'] as const).map((q) => (
+                    {(['low', 'medium', 'high'] as const).map((level) => (
                       <button
-                        key={q}
-                        onClick={() => setQuality(q)}
+                        key={level}
+                        onClick={() => setCompressionLevel(level)}
                         className={`py-4 px-2 border rounded-xl text-center capitalize transition-all duration-150 ${
-                          quality === q 
+                          compressionLevel === level 
                             ? 'bg-lavender/20 border-lavender text-ink dark:text-white shadow-sm ring-1 ring-lavender' 
                             : 'bg-transparent border-ink/10 dark:border-white/10 opacity-70 hover:opacity-100 hover:border-ink/20 dark:hover:border-white/20'
                         }`}
                       >
-                        <div className="font-medium text-sm mb-1">{q}</div>
-                        <div className="text-[10px] opacity-60 uppercase tracking-wider">Quality</div>
+                        <div className="font-medium text-sm mb-1">{level}</div>
+                        <div className="text-[10px] opacity-60 uppercase tracking-wider">Compression</div>
                       </button>
                     ))}
                   </div>
                   <p className="text-xs opacity-50 mt-4 text-center">
-                    Lower quality compresses embedded images more aggressively.
+                    Higher compression downsamples images more aggressively to save space.
                   </p>
                 </div>
 
@@ -215,7 +219,9 @@ export default function CompressPdfPage() {
                 <div className="flex items-center justify-center mb-8">
                   <div className="bg-sage/40 dark:bg-sage/20 text-ink dark:text-sage px-6 py-3 rounded-full font-medium flex items-center text-sm shadow-sm border border-sage/50">
                     <CheckCircle2 className="w-4 h-4 mr-2" />
-                    Success! Reduced by {Math.round((1 - result.newSize / result.originalSize) * 100)}%
+                    {result.newSize >= result.originalSize * 0.95 && result.imagesProcessed === 0 
+                      ? "This PDF is already efficiently sized"
+                      : `Success! Reduced by ${Math.round(Math.max(0, 1 - result.newSize / result.originalSize) * 100)}%`}
                   </div>
                 </div>
 
