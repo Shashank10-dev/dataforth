@@ -60,37 +60,74 @@ export default function Home() {
           <p className="opacity-70 font-sans mt-2">Jump straight to any tool in one click.</p>
         </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 gap-y-12">
-          {sortedCategories.map(category => {
-            const Icon = category.icon;
-            return (
-              <div key={category.name} className="flex flex-col">
-                <div className="flex items-center gap-2 mb-4">
-                  <div className={`w-8 h-8 rounded-lg flex items-center justify-center ${category.color} opacity-90`}>
-                    <Icon className="w-4 h-4" />
+        <div className="flex flex-col gap-12">
+          {/* Row 1 */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {sortedCategories.slice(0, 4).map(category => {
+              const Icon = category.icon;
+              return (
+                <div key={category.name} className="flex flex-col">
+                  <div className="flex items-center gap-2 mb-4">
+                    <div className={`w-8 h-8 rounded-lg flex items-center justify-center ${category.color} opacity-90`}>
+                      <Icon className="w-4 h-4" />
+                    </div>
+                    <h3 className="font-medium text-lg">{category.title}</h3>
                   </div>
-                  <h3 className="font-medium text-lg">{category.title}</h3>
+                  <ul className="space-y-3 font-sans flex-grow">
+                    {category.tools.map(tool => (
+                      <li key={tool.name}>
+                        <Link 
+                          href={tool.href}
+                          className="group flex flex-col p-4 bg-white dark:bg-dark-card border border-ink/10 dark:border-white/10 rounded-xl hover:border-ink/30 dark:hover:border-white/30 hover:shadow-sm transition-all duration-150"
+                        >
+                          <span className="font-medium text-ink dark:text-white group-hover:text-ink/80 dark:group-hover:text-white/80 transition-colors">
+                            {tool.name}
+                          </span>
+                          <span className="text-sm opacity-60 leading-snug mt-1">
+                            {tool.description}
+                          </span>
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
                 </div>
-                <ul className="space-y-3 font-sans">
-                  {category.tools.map(tool => (
-                    <li key={tool.name}>
-                      <Link 
-                        href={tool.href}
-                        className="group flex flex-col p-3 -ml-3 rounded-xl hover:bg-cream dark:hover:bg-dark-cream transition-colors"
-                      >
-                        <span className="font-medium text-ink dark:text-white group-hover:text-ink/80 dark:group-hover:text-white/80 transition-colors">
-                          {tool.name}
-                        </span>
-                        <span className="text-sm opacity-60 leading-snug mt-1">
-                          {tool.description}
-                        </span>
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            );
-          })}
+              );
+            })}
+          </div>
+
+          {/* Row 2 */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {sortedCategories.slice(4, 8).map(category => {
+              const Icon = category.icon;
+              return (
+                <div key={category.name} className="flex flex-col">
+                  <div className="flex items-center gap-2 mb-4">
+                    <div className={`w-8 h-8 rounded-lg flex items-center justify-center ${category.color} opacity-90`}>
+                      <Icon className="w-4 h-4" />
+                    </div>
+                    <h3 className="font-medium text-lg">{category.title}</h3>
+                  </div>
+                  <ul className="space-y-3 font-sans flex-grow">
+                    {category.tools.map(tool => (
+                      <li key={tool.name}>
+                        <Link 
+                          href={tool.href}
+                          className="group flex flex-col p-4 bg-white dark:bg-dark-card border border-ink/10 dark:border-white/10 rounded-xl hover:border-ink/30 dark:hover:border-white/30 hover:shadow-sm transition-all duration-150"
+                        >
+                          <span className="font-medium text-ink dark:text-white group-hover:text-ink/80 dark:group-hover:text-white/80 transition-colors">
+                            {tool.name}
+                          </span>
+                          <span className="text-sm opacity-60 leading-snug mt-1">
+                            {tool.description}
+                          </span>
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              );
+            })}
+          </div>
         </div>
       </section>
 
