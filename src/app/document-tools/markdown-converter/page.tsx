@@ -13,6 +13,7 @@ export default function MarkdownConverterPage() {
   const [error, setError] = useState<string | null>(null);
   const [viewMode, setViewMode] = useState<'preview' | 'raw'>('raw');
   const [copied, setCopied] = useState<boolean>(false);
+  const [isDragOver, setIsDragOver] = useState<boolean>(false);
   
   const fileInputRef = useRef<HTMLInputElement>(null);
 
@@ -242,9 +243,10 @@ export default function MarkdownConverterPage() {
         {/* Upload Column */}
         <div className="flex flex-col gap-6">
           <div 
-            className={`flex flex-col items-center justify-center border-2 border-dashed rounded-[2rem] p-12 transition-colors bg-white dark:bg-dark-card ${file ? 'border-[#FCD34D] bg-[#FCD34D]/5 dark:bg-[#FCD34D]/5' : 'border-ink/20 dark:border-white/20 hover:border-[#FCD34D]/50'}`}
-            onDragOver={(e) => e.preventDefault()}
-            onDrop={handleDrop}
+            className={`flex flex-col items-center justify-center border-2 border-dashed rounded-[2rem] p-12 transition-colors bg-white dark:bg-dark-card ${isDragOver || file ? 'border-[#FCD34D] bg-[#FCD34D]/5 dark:bg-[#FCD34D]/5' : 'border-ink/20 dark:border-white/20 hover:border-[#FCD34D]/50'}`}
+            onDragOver={(e) => { e.preventDefault(); setIsDragOver(true); }}
+            onDragLeave={() => setIsDragOver(false)}
+            onDrop={(e) => { setIsDragOver(false); handleDrop(e); }}
           >
             {isConverting ? (
               <div className="flex flex-col items-center">

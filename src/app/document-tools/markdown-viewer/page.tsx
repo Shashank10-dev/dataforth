@@ -14,6 +14,7 @@ export default function MarkdownViewerPage() {
   const [viewMode, setViewMode] = useState<'preview' | 'raw'>('preview');
   const [copied, setCopied] = useState<boolean>(false);
   const [isProcessing, setIsProcessing] = useState<boolean>(false);
+  const [isDragOver, setIsDragOver] = useState<boolean>(false);
   
   const fileInputRef = useRef<HTMLInputElement>(null);
 
@@ -298,17 +299,11 @@ export default function MarkdownViewerPage() {
         <div className="flex flex-col gap-6 h-[600px] lg:h-auto min-h-[600px]">
           
           <div 
-            className="flex-grow flex flex-col bg-white dark:bg-dark-card border border-ink/10 dark:border-white/10 rounded-[2rem] overflow-hidden shadow-sm relative group"
-            onDragOver={(e) => e.preventDefault()}
-            onDrop={handleDrop}
+            className={`flex-grow flex flex-col border rounded-[2rem] overflow-hidden shadow-sm relative transition-colors ${isDragOver ? 'border-[#FCD34D] bg-[#FCD34D]/5 dark:bg-[#FCD34D]/5' : 'bg-white dark:bg-dark-card border-ink/10 dark:border-white/10'}`}
+            onDragOver={(e) => { e.preventDefault(); setIsDragOver(true); }}
+            onDragLeave={() => setIsDragOver(false)}
+            onDrop={(e) => { setIsDragOver(false); handleDrop(e); }}
           >
-            {/* File drop overlay */}
-            <div className="absolute inset-0 z-10 hidden group-hover:flex items-center justify-center bg-white/90 dark:bg-dark-card/90 backdrop-blur-sm pointer-events-none transition-all">
-               <div className="text-center">
-                 <UploadCloud className="w-12 h-12 text-[#FCD34D] mb-4 mx-auto" />
-                 <p className="font-medium">Drop Markdown file here</p>
-               </div>
-            </div>
 
             <div className="p-4 border-b border-ink/5 dark:border-white/5 flex items-center justify-between bg-cream/50 dark:bg-dark-cream/50">
               <div className="flex items-center gap-2">
