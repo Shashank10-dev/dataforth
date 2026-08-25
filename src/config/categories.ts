@@ -38,6 +38,7 @@ export const categories: CategoryItem[] = [
     icon: FileText,
     tools: [
       { name: 'Markdown Converter', href: '/document-tools/markdown-converter' },
+      { name: 'Markdown Viewer', href: '/document-tools/markdown-viewer' },
     ]
   },
   {
