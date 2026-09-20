@@ -39,6 +39,12 @@ export const categories: CategoryItem[] = [
         keywords: ['combine pdf', 'join pdf', 'append pdf', 'bind pdf', 'pdf merger', 'mix pdf'], 
         href: '/pdf-tools/merge-pdf' 
       },
+      { 
+        name: 'Split PDF', 
+        description: 'Extract specific pages or split a PDF into separate files.', 
+        keywords: ['extract pdf pages', 'separate pdf pages', 'split pdf into multiple files', 'cut pdf pages'], 
+        href: '/pdf-tools/split-pdf'
+      },
     ]
   },
   {
@@ -126,6 +132,12 @@ export const categories: CategoryItem[] = [
         description: 'Convert CTC to take-home salary and breakdown deductions.', 
         keywords: ['take home salary', 'ctc calculator', 'net pay', 'in hand salary'], 
         href: '/finance-tools/salary-calculator' 
+      },
+      { 
+        name: 'Salary Structure', 
+        description: 'Generate formatted salary breakups for offer letters.', 
+        keywords: ['salary breakup', 'ctc structure', 'salary structuring template', 'offer letter salary breakdown'], 
+        href: '/finance-tools/salary-structure-generator' 
       },
     ]
   },
